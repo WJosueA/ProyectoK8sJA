@@ -19,3 +19,5 @@ Rollback Commands:
   
 Ver histrial del cambio {de acuerdo al yaml por revisar ej abajo fe-deployment:
   kubectl rollout history deploy fe-deployment.yaml
+
+View site in localhost currently on port: http://localhost:30935/
