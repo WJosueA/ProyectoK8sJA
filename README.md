@@ -13,11 +13,13 @@ Deployment Commands:
   kubectl create -f lb-wp.yaml
 
 Deployments estan bajo RollingUpdate con 3 replicas
+Para aplicar cambios guardar los cambios en respectivo yaml y ejecutar:{de acuerdo al yaml por revisar ej abajo fe-deployment}
+kubectl apply -f fe-deployment.yaml
 
 Rollback Commands:
   kubectl rollout undo
   
-Ver histrial del cambio {de acuerdo al yaml por revisar ej abajo fe-deployment:
+Ver historial del cambio {de acuerdo al yaml por revisar ej abajo fe-deployment:
   kubectl rollout history deploy fe-deployment.yaml
 
 View site in localhost currently on port: http://localhost:30935/
