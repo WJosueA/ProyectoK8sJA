@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpressja
+  labels:
+    app: wordpressja
+spec:
+  strategy:
+    type: RollingUpdate
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wordpressja
+  template:
+    metadata:
+      labels:
+        app: wordpressja
+    spec:
+      containers:
+      - name: wordpressja-container
+        image: wordpress
+        ports:
+        - containerPort: 80
+        env:
+        - name: WORDPRESS_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: WORDPRESS_DB_HOST
+              name: wordpressja
+        - name: WORDPRESS_DB_USER
+          valueFrom:
+            configMapKeyRef:
+              key: WORDPRESS_DB_USER
+              name: wordpressja
+        - name: WORDPRESS_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              key: WORDPRESS_DB_NAME
+              name: wordpressja
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: WORDPRESS_DB_PASSWORD
+              name: wordpressja
+        volumeMounts:
+          - mountPath: /var/www/html
+            name: wordpressja-pvc
+      volumes:
+        - name: wordpressja-pvc
+          persistentVolumeClaim:
+            claimName: wordpressja
